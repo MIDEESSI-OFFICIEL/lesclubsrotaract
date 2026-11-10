@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Club Rotaract de Cotonou Rive Gauche Cica · Rotaract, Cotonou</title>
+  <meta name="description" content="Découvrez le Club Rotaract de Cotonou Rive Gauche Cica : ses informations pratiques, ses réunions et les contacts pour le rejoindre.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://lesclubsrotaract.onrender.com/club-rive-gauche-cica.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Les clubs Rotaract de Cotonou et d’Abomey-Calavi">
+  <meta property="og:title" content="Club Rotaract de Cotonou Rive Gauche Cica · Rotaract, Cotonou">
+  <meta property="og:description" content="Découvrez le Club Rotaract de Cotonou Rive Gauche Cica : ses informations pratiques, ses réunions et les contacts pour le rejoindre.">
+  <meta property="og:url" content="https://lesclubsrotaract.onrender.com/club-rive-gauche-cica.html">
+  <meta property="og:image" content="https://lesclubsrotaract.onrender.com/seo/rive-gauche-cica-social.jpg">
+  <meta property="og:image:secure_url" content="https://lesclubsrotaract.onrender.com/seo/rive-gauche-cica-social.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Aperçu du Club Rotaract de Cotonou Rive Gauche Cica">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Club Rotaract de Cotonou Rive Gauche Cica · Rotaract, Cotonou">
+  <meta name="twitter:description" content="Découvrez le Club Rotaract de Cotonou Rive Gauche Cica : ses informations pratiques, ses réunions et les contacts pour le rejoindre.">
+  <meta name="twitter:image" content="https://lesclubsrotaract.onrender.com/seo/rive-gauche-cica-social.jpg">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Club Rotaract de Cotonou Rive Gauche Cica", "url": "https://lesclubsrotaract.onrender.com/club-rive-gauche-cica.html", "description": "Découvrez les informations pratiques et les contacts du club Rotaract de Cotonou Rive Gauche Cica.", "image": "https://lesclubsrotaract.onrender.com/seo/rive-gauche-cica-social.jpg", "areaServed": {"@type": "City", "name": "Cotonou"}, "address": {"@type": "PostalAddress", "addressLocality": "Cotonou", "addressCountry": "BJ"}, "contactPoint": {"@type": "ContactPoint", "telephone": "+2290161891713", "contactType": "information", "availableLanguage": ["French"]}}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="data.js"></script>
+  <script defer src="club.js"></script>
+</head>
+<body>
+  <header class="entete">
+    <div class="entete__in">
+      <a class="marque" href="index.html?retour=1">Rotaract</a>
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="index.html?retour=1">Accueil</a>
+        <a href="index.html?retour=1#clubs">Clubs</a>
+        <a href="assistant.html">Assistant IA</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <a class="retour" href="index.html?retour=1#clubs">← Tous les clubs</a>
+
+    <article class="fiche" id="fiche">
+      <div class="fiche__img"><img id="fiche-image" src="" alt=""></div>
+      <div class="fiche__texte">
+        <p class="fiche__ville" id="fiche-ville"></p>
+        <h1 class="fiche__nom" id="fiche-nom"></h1>
+        <p class="fiche__info" id="fiche-info"></p>
+        <p class="fiche__desc" id="fiche-desc"></p>
+        <div class="pres">
+          <img class="pres__photo" id="pres-photo" src="" alt="">
+          <div>
+            <p class="pres__role">Président(e) du club</p>
+            <p class="pres__nom" id="pres-nom"></p>
+          </div>
+        </div>
+        <div class="actions">
+          <a class="bouton" href="#rejoindre">Rejoindre ce club</a>
+          <button class="bouton bouton--clair" id="inviter-club" type="button">Inviter à rejoindre ce club</button>
+          <a class="bouton bouton--clair" href="index.html?retour=1#clubs">Tous les clubs</a>
+        </div>
+        <p class="invitation-statut" id="invitation-statut" role="status" aria-live="polite"></p>
+      </div>
+    </article>
+
+    <section class="infos" id="infos" aria-label="Informations pratiques">
+      <div class="infos__carte">
+        <h2 class="infos__titre">Informations de réunion</h2>
+        <dl class="infos__liste">
+          <div><dt>Jour</dt><dd id="r-jour"></dd></div>
+          <div><dt>Heure</dt><dd id="r-heure"></dd></div>
+          <div><dt>Lieu</dt><dd id="r-lieu"></dd></div>
+        </dl>
+      </div>
+      <div class="infos__carte">
+        <h2 class="infos__titre">Contacts</h2>
+        <dl class="infos__liste">
+          <div><dt>WhatsApp</dt><dd id="c-whatsapp"></dd></div>
+          <div><dt>Téléphone</dt><dd id="c-tel"></dd></div>
+          <div><dt>E-mail</dt><dd id="c-email"></dd></div>
+          <div><dt>Facebook</dt><dd id="c-facebook"></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="qr-club" id="qr-club" aria-labelledby="qr-club-titre">
+      <div class="qr-club__intro">
+        <p class="qr-club__sur-titre">À partager</p>
+        <h2 class="infos__titre" id="qr-club-titre">Le QR code du club</h2>
+        <p>Scanne ce code pour ouvrir directement la fiche du club.</p>
+      </div>
+      <div class="qr-club__contenu">
+        <figure class="qr-club__apercu qr-club__apercu--transparent">
+          <img id="qr-club-transparent" alt="" width="360" height="360" loading="lazy" decoding="async">
+          <figcaption>Fond transparent</figcaption>
+        </figure>
+        <figure class="qr-club__apercu qr-club__apercu--doux">
+          <img id="qr-club-fond" alt="" width="360" height="360" loading="lazy" decoding="async">
+          <figcaption>Fond doux</figcaption>
+        </figure>
+      </div>
+      <div class="qr-club__telechargements">
+        <a class="bouton" id="qr-club-telecharger-transparent" download>Télécharger sans fond</a>
+        <a class="bouton bouton--clair" id="qr-club-telecharger-fond" download>Télécharger avec fond</a>
+      </div>
+    </section>
+
+    <section class="rejoindre" id="rejoindre" aria-labelledby="rejoindre-titre">
+      <h2 class="rejoindre__titre" id="rejoindre-titre">Rejoindre ce club</h2>
+      <p class="rejoindre__intro">Remplis ce formulaire : ta demande est envoyée directement au club.</p>
+      <form id="form-rejoindre">
+        <div class="form__ligne">
+          <label class="form__champ">Nom et prénom
+            <input name="nom" type="text" required autocomplete="name">
+          </label>
+          <label class="form__champ">Téléphone
+            <input name="tel" type="tel" required autocomplete="tel">
+          </label>
+        </div>
+        <label class="form__champ">E-mail (facultatif)
+          <input name="email" type="email" autocomplete="email">
+        </label>
+        <label class="form__champ">Message (facultatif)
+          <textarea name="message" rows="4" placeholder="Pourquoi veux-tu rejoindre ce club ?"></textarea>
+        </label>
+        <button type="submit" class="bouton">Envoyer ma demande</button>
+        <p class="form__statut" id="form-statut" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section id="introuvable" hidden>
+      <h1 class="fiche__nom">Club introuvable</h1>
+      <p class="fiche__desc">Ce club n’existe pas ou le lien est incorrect.</p>
+      <a class="bouton" href="index.html?retour=1#clubs">Voir tous les clubs</a>
+    </section>
+
+    <section id="autres" class="autres" hidden>
+      <h2 class="autres__titre">Voir aussi</h2>
+      <ul class="grille" id="grille"></ul>
+    </section>
+  </main>
+
+  <footer class="pied">
+    <p class="pied__titre">Rotaract</p>
+    <p>Les clubs de Cotonou et d’Abomey-Calavi, District 9103.</p>
+    <p class="pied__signature">
+      <img src="fanion-nautile-connect.webp" alt="" loading="lazy" decoding="async">
+      <span>Site développé par le Club Rotaract Satellite de Cotonou le Nautile Connect</span>
+    </p>
+    <p class="pied__copy">© 2026</p>
+  </footer>
+
+</body>
+</html>

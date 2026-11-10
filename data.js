@@ -86,6 +86,10 @@ function normaliser(t) {
   return t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 }
 
+function urlFicheClub(club) {
+  return 'club-' + encodeURIComponent(club.slug) + '.html';
+}
+
 /* Carte cliquable vers la page du club */
 function creerCarte(club, i, anime) {
   const li = document.createElement('li');
@@ -93,7 +97,7 @@ function creerCarte(club, i, anime) {
   li.style.setProperty('--i', i);
   const a = document.createElement('a');
   a.className = 'carte';
-  a.href = 'club.html?club=' + encodeURIComponent(club.slug);
+  a.href = urlFicheClub(club);
   const img = document.createElement('img');
   img.className = 'carte__image';
   img.src = club.image;

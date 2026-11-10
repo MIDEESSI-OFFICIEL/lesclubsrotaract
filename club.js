@@ -1,6 +1,7 @@
-/* Page d'un club : club.html?club=<slug> */
+/* Page d'un club : club-<slug>.html ou club.html?club=<slug> */
 const $ = (id) => document.getElementById(id);
-const slug = new URLSearchParams(location.search).get('club');
+const cheminFiche = location.pathname.match(/\/club-([a-z0-9-]+)\.html$/);
+const slug = cheminFiche ? cheminFiche[1] : new URLSearchParams(location.search).get('club');
 const club = CLUBS.find(c => c.slug === slug);
 
 function ouvrirPartageWhatsApp(statut, message) {
@@ -38,7 +39,7 @@ if (!club) {
   $('rejoindre').hidden = true;
   $('introuvable').hidden = false;
 } else {
-  document.title = club.nom + ' · Rotaract';
+  document.title = club.nom + ' · Rotaract, ' + club.ville;
   const img = $('fiche-image');
   img.src = club.image;
   img.loading = 'eager';
@@ -86,7 +87,7 @@ if (!club) {
 
   const invitationStatut = $('invitation-statut');
   $('inviter-club').addEventListener('click', async () => {
-    const url = new URL('club.html?club=' + encodeURIComponent(club.slug), location.href).href;
+    const url = new URL(urlFicheClub(club), location.href).href;
     const rencontre = [club.jour, club.heure, club.lieu].filter(Boolean).join(' · ');
     const invitation = [
       'Tu es invité(e) à découvrir et rejoindre ' + club.nom + ' !',

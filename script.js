@@ -78,7 +78,7 @@ function afficherReunionsProches() {
   const message = document.createElement('p');
   message.className = 'alerte-reunion__message';
   const lien = document.createElement('a');
-  lien.href = 'club.html?club=' + encodeURIComponent(club.slug);
+  lien.href = urlFicheClub(club);
   const nomCourt = club.nom.replace(/^Club Rotaract(?: Satellite)?(?: de)? /, '');
   lien.textContent = nomCourt;
   message.append('Réunion : ', lien, ' · ', formatterDateBenin.format(instant), ' à ', club.heure);
@@ -229,7 +229,7 @@ function carteRecommandationAssistant(club) {
   gererImageAbsente(image);
   const details = document.createElement('div');
   const lien = document.createElement('a');
-  lien.href = 'club.html?club=' + encodeURIComponent(club.slug);
+  lien.href = urlFicheClub(club);
   lien.textContent = club.nom;
   details.appendChild(lien);
   const reunion = document.createElement('p');
