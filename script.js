@@ -437,7 +437,7 @@ function ouvrirAssistant(ouvert) {
       ajouterMessageAssistant('Salut, bienvenue ! 😊 On va chercher ensemble un club qui te ressemble. Qu’est-ce qui t’attire le plus ?');
       optionsInteretsAssistant();
     }
-    assistantInput.focus();
+    if (!window.matchMedia('(max-width: 480px)').matches) assistantInput.focus();
   } else {
     assistantLauncher.focus();
   }

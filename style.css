@@ -149,6 +149,7 @@ html.ready .titre{animation:t-entree .8s ease-out both}
 @media (max-width:480px){
   .assistant__launcher{right:14px;bottom:14px;width:62px;height:62px}
   .assistant__panel{right:8px;bottom:84px;width:calc(100vw - 16px);height:min(600px,calc(100dvh - 104px));min-height:280px}
+  .assistant__form input{font-size:16px}
 }
 @media (prefers-reduced-motion:reduce){.assistant__launcher{transition:none}.assistant__message--reflexion::after{animation:none}}
 
