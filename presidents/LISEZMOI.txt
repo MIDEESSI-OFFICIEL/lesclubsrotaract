@@ -1,0 +1,6 @@
+Mets ici la photo de chaque président (webp, carrée de préférence), nommée comme le club :
+nautile-connect.webp, rive-gauche-cica.webp, abomey-calavi-plateau.webp, cotonou-nautile.webp,
+cotonou-haie-vive.webp, cotonou-ife.webp, cotonou-lagune.webp, cotonou-etoile.webp
+Fanions manquants à déposer à la racine du site :
+fanion-nautile-connect.webp, fanion-rive-gauche-cica.webp, fanion-nautile.webp
+Le nom, les réunions et les contacts se remplissent dans data.js.

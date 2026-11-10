@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rotaract · Les clubs de Cotonou et d’Abomey-Calavi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Chargement : fanions en orbite + texte (rempli par script.js) -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__stage">
+      <div class="loader__orbit" id="loader-orbit"></div>
+      <p class="loader__devise">Servir D'abord</p>
+    </div>
+    <p class="loader__texte">Chargement des clubs…</p>
+  </div>
+
+  <header class="entete">
+    <div class="entete__in">
+      <a class="marque" href="index.html?retour=1">Rotaract</a>
+      <nav class="nav nav--accueil" aria-label="Téléchargement du prospectus">
+        <a class="nav__prospectus" href="prospectus-clubs-rotaract.pdf" download="Prospectus-clubs-Rotaract.pdf">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
+          <span>Télécharger le prospectus</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="intro">
+      <h1 class="titre">Bienvenue au <span class="titre__accent">Rotaract</span></h1>
+    </section>
+
+    <section id="clubs" aria-labelledby="clubs-titre">
+      <h2 class="sr-only" id="clubs-titre">Liste des clubs</h2>
+      <div class="recherche">
+        <svg class="recherche__loupe" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <label class="sr-only" for="recherche">Rechercher un club</label>
+        <input id="recherche" type="search" placeholder="Rechercher un club" autocomplete="off">
+        <button type="button" class="recherche__filtre" id="filtre-btn" aria-label="Filtrer par ville" aria-expanded="false" aria-controls="filtre-menu">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>
+        </button>
+        <fieldset class="menu" id="filtre-menu" hidden>
+          <legend class="menu__titre">Ville</legend>
+          <label class="menu__option"><input type="radio" name="ville" value="tous" checked> Toutes les villes</label>
+          <label class="menu__option"><input type="radio" name="ville" value="Cotonou"> Cotonou</label>
+          <label class="menu__option"><input type="radio" name="ville" value="Abomey-Calavi"> Abomey-Calavi</label>
+          <label class="menu__option"><input type="radio" name="ville" value="Autre"> Autre</label>
+        </fieldset>
+      </div>
+      <div class="reunions-proches" id="reunions-proches" aria-live="polite" aria-atomic="false" hidden></div>
+      <p class="compte" id="compte" aria-live="polite"></p>
+      <ul class="grille" id="grille"></ul>
+      <div class="vide" id="vide" hidden>
+        <p>Aucun club ne correspond à cette recherche.</p>
+        <button type="button" class="bouton" id="reset">Réinitialiser</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pied">
+    <p class="pied__titre">Rotaract</p>
+    <p>Les clubs de Cotonou et d’Abomey-Calavi, District 9103.</p>
+    <p class="pied__signature">
+      <img src="fanion-nautile-connect.webp" alt="">
+      <span>Site développé par le Club Rotaract Satellite de Cotonou le Nautile Connect</span>
+    </p>
+    <p class="pied__copy">© 2026</p>
+  </footer>
+
+  <div class="assistant" id="assistant">
+    <button class="assistant__launcher" id="assistant-launcher" type="button"
+      aria-label="Ouvrir l’assistant pour choisir un club" aria-expanded="false" aria-controls="assistant-panel">
+      <span class="assistant__launcher-animation" id="assistant-animation" aria-hidden="true"></span>
+      <span class="assistant__launcher-fallback" aria-hidden="true">✦</span>
+    </button>
+    <section class="assistant__panel" id="assistant-panel" aria-label="Discussion pour choisir un club" hidden>
+      <header class="assistant__header">
+        <div>
+          <h2 class="assistant__titre">Choisir un club</h2>
+          <p class="assistant__sous-titre">Conseiller local Rotaract</p>
+        </div>
+        <button class="assistant__fermer" id="assistant-close" type="button" aria-label="Fermer la discussion">×</button>
+      </header>
+      <div class="assistant__messages" id="assistant-messages" role="log" aria-live="polite" aria-relevant="additions"></div>
+      <form class="assistant__form" id="assistant-form">
+        <label class="sr-only" for="assistant-input">Écrire un message</label>
+        <input id="assistant-input" name="message" type="text" placeholder="Écris ce que tu recherches…" autocomplete="off">
+        <button class="assistant__envoyer" type="submit" aria-label="Envoyer le message">➤</button>
+      </form>
+      <p class="assistant__note">Suggestions basées sur les informations disponibles sur le site.</p>
+    </section>
+  </div>
+
+  <noscript><p style="text-align:center;padding:2rem">Activez JavaScript pour afficher les clubs.</p></noscript>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
