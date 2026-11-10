@@ -519,8 +519,7 @@ if (grille) {
   afficher();
   afficherReunionsProches();
 
-  const sansLoader = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    || location.search.includes('retour');
+  const sansLoader = location.search.includes('retour');
   if (location.search.includes('retour')) history.replaceState(null, '', location.pathname + location.hash);
   if (sansLoader) {
     loader.remove();

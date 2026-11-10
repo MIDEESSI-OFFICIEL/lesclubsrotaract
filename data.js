@@ -34,8 +34,10 @@ const CLUBS = [
 
   { slug: 'cotonou-nautile', nom: 'Club Rotaract de Cotonou le Nautile',
     image: 'fanion-nautile.webp', ville: 'Cotonou', info: '', description: '',
-    president: '', photo: 'presidents/cotonou-nautile.webp',
-    jour: '', heure: '', lieu: '', whatsapp: '', telephone: '', email: '', facebook: '' },
+    president: 'Géraud BOYA', photo: 'presidents/cotonou-nautile.webp',
+    jour: '1er et 3e lundi du mois', heure: '19 h 30', lieu: 'J Réside, Gbèdjromèdé',
+    reunion: { jourSemaine: 1, semaines: [1, 3] },
+    whatsapp: '2290166238055', telephone: '01 66 23 80 55', email: '', facebook: '' },
 
   { slug: 'cotonou-haie-vive', nom: 'Club Rotaract de Cotonou Haie Vive',
     image: 'fanion-haie-vive.webp', ville: 'Cotonou', info: '', description: '',
