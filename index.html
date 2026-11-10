@@ -73,28 +73,12 @@
     <p class="pied__copy">© 2026</p>
   </footer>
 
-  <div class="assistant" id="assistant">
-    <button class="assistant__launcher" id="assistant-launcher" type="button"
-      aria-label="Ouvrir l’assistant pour choisir un club" aria-expanded="false" aria-controls="assistant-panel">
+  <div class="assistant">
+    <a class="assistant__launcher" id="assistant-launcher" href="assistant.html"
+      aria-label="Ouvrir l’assistant pour choisir un club">
       <span class="assistant__launcher-animation" id="assistant-animation" aria-hidden="true"></span>
       <span class="assistant__launcher-fallback" aria-hidden="true">✦</span>
-    </button>
-    <section class="assistant__panel" id="assistant-panel" aria-label="Discussion pour choisir un club" hidden>
-      <header class="assistant__header">
-        <div>
-          <h2 class="assistant__titre">Choisir un club</h2>
-          <p class="assistant__sous-titre">Conseiller local Rotaract</p>
-        </div>
-        <button class="assistant__fermer" id="assistant-close" type="button" aria-label="Fermer la discussion">×</button>
-      </header>
-      <div class="assistant__messages" id="assistant-messages" role="log" aria-live="polite" aria-relevant="additions"></div>
-      <form class="assistant__form" id="assistant-form">
-        <label class="sr-only" for="assistant-input">Écrire un message</label>
-        <input id="assistant-input" name="message" type="text" placeholder="Écris ce que tu recherches…" autocomplete="off">
-        <button class="assistant__envoyer" type="submit" aria-label="Envoyer le message">➤</button>
-      </form>
-      <p class="assistant__note">Suggestions basées sur les informations disponibles sur le site.</p>
-    </section>
+    </a>
   </div>
 
   <noscript><p style="text-align:center;padding:2rem">Activez JavaScript pour afficher les clubs.</p></noscript>

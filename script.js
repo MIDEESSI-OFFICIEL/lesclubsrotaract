@@ -114,21 +114,23 @@ function ouvrirMenu(ouvert) {
   menu.hidden = !ouvert;
   btnFiltre.setAttribute('aria-expanded', String(ouvert));
 }
-btnFiltre.addEventListener('click', () => ouvrirMenu(menu.hidden));
-menu.addEventListener('change', () => { afficher(); ouvrirMenu(false); });
-document.addEventListener('click', (e) => {
-  if (!menu.hidden && !menu.contains(e.target) && !btnFiltre.contains(e.target)) ouvrirMenu(false);
-});
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && !menu.hidden) { ouvrirMenu(false); btnFiltre.focus(); }
-});
+if (grille) {
+  btnFiltre.addEventListener('click', () => ouvrirMenu(menu.hidden));
+  menu.addEventListener('change', () => { afficher(); ouvrirMenu(false); });
+  document.addEventListener('click', (e) => {
+    if (!menu.hidden && !menu.contains(e.target) && !btnFiltre.contains(e.target)) ouvrirMenu(false);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !menu.hidden) { ouvrirMenu(false); btnFiltre.focus(); }
+  });
 
-recherche.addEventListener('input', afficher);
-document.getElementById('reset').addEventListener('click', () => {
-  recherche.value = '';
-  document.querySelector('input[name="ville"][value="tous"]').checked = true;
-  afficher();
-});
+  recherche.addEventListener('input', afficher);
+  document.getElementById('reset').addEventListener('click', () => {
+    recherche.value = '';
+    document.querySelector('input[name="ville"][value="tous"]').checked = true;
+    afficher();
+  });
+}
 
 const assistantLauncher = document.getElementById('assistant-launcher');
 const assistantPanel = document.getElementById('assistant-panel');
@@ -429,8 +431,8 @@ function afficherTousLesClubsAssistant() {
 }
 
 function ouvrirAssistant(ouvert) {
-  assistantPanel.hidden = !ouvert;
-  assistantLauncher.setAttribute('aria-expanded', String(ouvert));
+  if (assistantPanel) assistantPanel.hidden = !ouvert;
+  if (assistantLauncher) assistantLauncher.setAttribute('aria-expanded', String(ouvert));
   if (ouvert) {
     if (!assistantStarted) {
       assistantStarted = true;
@@ -438,33 +440,34 @@ function ouvrirAssistant(ouvert) {
       optionsInteretsAssistant();
     }
     if (!window.matchMedia('(max-width: 480px)').matches) assistantInput.focus();
-  } else {
+  } else if (assistantLauncher) {
     assistantLauncher.focus();
   }
 }
 
-assistantLauncher.addEventListener('click', () => ouvrirAssistant(assistantPanel.hidden));
-document.getElementById('assistant-close').addEventListener('click', () => ouvrirAssistant(false));
-assistantForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const texte = assistantInput.value.trim();
-  if (!texte) return;
-  assistantInput.value = '';
-  ajouterMessageAssistant(texte, true);
-  traiterMessageAssistant(texte);
-});
+if (assistantForm) {
+  assistantForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const texte = assistantInput.value.trim();
+    if (!texte) return;
+    assistantInput.value = '';
+    ajouterMessageAssistant(texte, true);
+    traiterMessageAssistant(texte);
+  });
+}
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && !assistantPanel.hidden) ouvrirAssistant(false);
+  if (event.key === 'Escape' && assistantPanel && !assistantPanel.hidden) ouvrirAssistant(false);
 });
 
-if (window.lottie && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+if (assistantLauncher && window.lottie && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   const animationAssistant = window.lottie.loadAnimation({
     container: document.getElementById('assistant-animation'), renderer: 'svg',
-    loop: true, autoplay: true, path: 'assistant-clubs.json'
+    loop: false, autoplay: true, path: 'assistant-clubs.json'
   });
   animationAssistant.addEventListener('DOMLoaded', () => assistantLauncher.classList.add('is-ready'));
   animationAssistant.addEventListener('data_failed', () => assistantLauncher.classList.remove('is-ready'));
 }
+if (!assistantLauncher && assistantPanel) ouvrirAssistant(true);
 
 function afficherContenu() { racine.classList.add('ready'); }
 
@@ -497,11 +500,13 @@ function lancerLoader() {
   }, 2000);
 }
 
-afficher();
-afficherReunionsProches();
+if (grille) {
+  afficher();
+  afficherReunionsProches();
 
-// Pas de loader si animations réduites ou si on revient depuis une page club
-const sansLoader = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  || location.search.includes('retour');
-if (location.search.includes('retour')) history.replaceState(null, '', location.pathname + location.hash); // un rechargement rejoue le loader
-if (sansLoader) { loader.remove(); afficherContenu(); } else { lancerLoader(); }
+  // Pas de loader si animations réduites ou si on revient depuis une page club
+  const sansLoader = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    || location.search.includes('retour');
+  if (location.search.includes('retour')) history.replaceState(null, '', location.pathname + location.hash);
+  if (sansLoader) { loader.remove(); afficherContenu(); } else { lancerLoader(); }
+}

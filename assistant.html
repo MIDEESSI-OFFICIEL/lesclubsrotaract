@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Assistant Rotaract · Trouver un club</title>
+  <meta name="description" content="Discute avec l’assistant Rotaract pour trouver le club qui correspond à tes envies, ta ville et tes disponibilités.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="assistant-page">
+  <header class="entete">
+    <div class="entete__in">
+      <a class="marque" href="index.html?retour=1">Rotaract</a>
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="index.html?retour=1">Accueil</a>
+        <a href="index.html?retour=1#clubs">Tous les clubs</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="assistant-page__main">
+    <section class="assistant__panel" id="assistant-panel" aria-label="Discussion pour choisir un club">
+      <header class="assistant__header">
+        <div>
+          <h1 class="assistant__titre">L’assistant Rotaract</h1>
+          <p class="assistant__sous-titre">Conseiller local Rotaract</p>
+        </div>
+        <a class="assistant__retour" href="index.html?retour=1" aria-label="Retour à l’accueil">←</a>
+      </header>
+      <div class="assistant__messages" id="assistant-messages" role="log" aria-live="polite" aria-relevant="additions"></div>
+      <form class="assistant__form" id="assistant-form">
+        <label class="sr-only" for="assistant-input">Écrire un message</label>
+        <input id="assistant-input" name="message" type="text" placeholder="Écris ce que tu recherches…" autocomplete="off">
+        <button class="assistant__envoyer" type="submit" aria-label="Envoyer le message">➤</button>
+      </form>
+      <p class="assistant__note">Suggestions basées sur les informations disponibles sur le site.</p>
+    </section>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
