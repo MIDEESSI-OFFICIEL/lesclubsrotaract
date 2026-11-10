@@ -14,6 +14,14 @@
   <script defer src="script.js"></script>
 </head>
 <body>
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__stage">
+      <div class="loader__orbit" id="loader-orbit"></div>
+      <p class="loader__devise">Servir D'abord</p>
+    </div>
+    <p class="loader__texte">Chargement des clubs…</p>
+  </div>
+
   <header class="entete">
     <div class="entete__in">
       <a class="marque" href="index.html?retour=1">Rotaract</a>
@@ -72,7 +80,6 @@
     <a class="assistant__launcher" id="assistant-launcher" href="assistant.html"
       aria-label="Ouvrir l’assistant pour choisir un club">
       <span class="assistant__launcher-animation" id="assistant-animation" aria-hidden="true"></span>
-      <span class="assistant__launcher-fallback" aria-hidden="true">✦</span>
     </a>
   </div>
 

@@ -1,5 +1,7 @@
 /* Accueil : recherche, filtre et grille */
 const racine = document.documentElement;
+const loader = document.getElementById('loader');
+const orbite = document.getElementById('loader-orbit');
 const grille = document.getElementById('grille');
 const recherche = document.getElementById('recherche');
 const compte = document.getElementById('compte');
@@ -60,12 +62,9 @@ function afficherReunionsProches() {
   const cloche = document.createElement('div');
   cloche.className = 'alerte-reunion__cloche';
   cloche.setAttribute('aria-hidden', 'true');
-  const clocheSecours = document.createElement('span');
-  clocheSecours.className = 'alerte-reunion__cloche-secours';
-  clocheSecours.textContent = '🔔';
   const animationCloche = document.createElement('div');
   animationCloche.className = 'alerte-reunion__animation';
-  cloche.append(clocheSecours, animationCloche);
+  cloche.appendChild(animationCloche);
 
   const fanion = document.createElement('img');
   fanion.className = 'alerte-reunion__fanion';
@@ -455,6 +454,34 @@ if (!assistantLauncher && assistantPanel) ouvrirAssistant(true);
 
 function afficherContenu() { racine.classList.add('ready'); }
 
+function lancerLoader() {
+  const nombreFanions = CLUBS.length;
+  const largeur = nombreFanions > 5 ? 56 : 64;
+  const rayon = Math.max(64, Math.ceil(largeur * 1.1 / (2 * Math.sin(Math.PI / nombreFanions))));
+  orbite.style.setProperty('--angle', (360 / nombreFanions) + 'deg');
+  orbite.style.setProperty('--w', largeur + 'px');
+  orbite.style.setProperty('--h', Math.round(largeur * 1.35) + 'px');
+  orbite.style.setProperty('--r', rayon + 'px');
+  CLUBS.forEach((club, i) => {
+    const img = document.createElement('img');
+    img.className = 'loader__fanion';
+    img.src = club.image;
+    img.alt = '';
+    img.style.setProperty('--i', i);
+    gererImageAbsente(img);
+    orbite.appendChild(img);
+  });
+  document.body.style.overflow = 'hidden';
+  window.setTimeout(() => {
+    loader.classList.add('is-burst');
+    window.setTimeout(() => {
+      loader.remove();
+      document.body.style.overflow = '';
+      afficherContenu();
+    }, 200);
+  }, 2000);
+}
+
 function chargerAnimationsDecoratives() {
   if (window.lottie || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const script = document.createElement('script');
@@ -476,12 +503,10 @@ function chargerAnimationsDecoratives() {
     });
 
     if (assistantLauncher) {
-      const animationAssistant = window.lottie.loadAnimation({
+      window.lottie.loadAnimation({
         container: document.getElementById('assistant-animation'), renderer: 'svg',
         loop: false, autoplay: true, path: 'assistant-clubs.json'
       });
-      animationAssistant.addEventListener('DOMLoaded', () => assistantLauncher.classList.add('is-ready'));
-      animationAssistant.addEventListener('data_failed', () => assistantLauncher.classList.remove('is-ready'));
     }
   });
   script.addEventListener('error', () => {
@@ -494,18 +519,17 @@ if (grille) {
   afficher();
   afficherReunionsProches();
 
+  const sansLoader = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    || location.search.includes('retour');
   if (location.search.includes('retour')) history.replaceState(null, '', location.pathname + location.hash);
-  afficherContenu();
+  if (sansLoader) {
+    loader.remove();
+    afficherContenu();
+  } else {
+    lancerLoader();
+  }
 }
 
 if (assistantLauncher || document.querySelector('.alerte-reunion__animation')) {
-  const chargerPlusTard = () => {
-    if ('requestIdleCallback' in window) {
-      window.requestIdleCallback(chargerAnimationsDecoratives, { timeout: 2500 });
-    } else {
-      window.setTimeout(chargerAnimationsDecoratives, 800);
-    }
-  };
-  if (document.readyState === 'complete') chargerPlusTard();
-  else window.addEventListener('load', chargerPlusTard, { once: true });
+  chargerAnimationsDecoratives();
 }
