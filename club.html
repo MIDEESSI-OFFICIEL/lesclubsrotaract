@@ -6,8 +6,12 @@
   <title>Club · Rotary et Rotaract</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="style.css">
+  <script defer src="data.js"></script>
+  <script defer src="club.js"></script>
 </head>
 <body>
   <header class="entete">
@@ -40,8 +44,10 @@
         </div>
         <div class="actions">
           <a class="bouton" href="#rejoindre">Rejoindre ce club</a>
+          <button class="bouton bouton--clair" id="inviter-club" type="button">Inviter à rejoindre ce club</button>
           <a class="bouton bouton--clair" href="index.html?retour=1#clubs">Tous les clubs</a>
         </div>
+        <p class="invitation-statut" id="invitation-statut" role="status" aria-live="polite"></p>
       </div>
     </article>
 
@@ -62,6 +68,28 @@
           <div><dt>E-mail</dt><dd id="c-email"></dd></div>
           <div><dt>Facebook</dt><dd id="c-facebook"></dd></div>
         </dl>
+      </div>
+    </section>
+
+    <section class="qr-club" id="qr-club" aria-labelledby="qr-club-titre">
+      <div class="qr-club__intro">
+        <p class="qr-club__sur-titre">À partager</p>
+        <h2 class="infos__titre" id="qr-club-titre">Le QR code du club</h2>
+        <p>Scanne ce code pour ouvrir directement la fiche du club.</p>
+      </div>
+      <div class="qr-club__contenu">
+        <figure class="qr-club__apercu qr-club__apercu--transparent">
+          <img id="qr-club-transparent" alt="" width="360" height="360" loading="lazy" decoding="async">
+          <figcaption>Fond transparent</figcaption>
+        </figure>
+        <figure class="qr-club__apercu qr-club__apercu--doux">
+          <img id="qr-club-fond" alt="" width="360" height="360" loading="lazy" decoding="async">
+          <figcaption>Fond doux</figcaption>
+        </figure>
+      </div>
+      <div class="qr-club__telechargements">
+        <a class="bouton" id="qr-club-telecharger-transparent" download>Télécharger sans fond</a>
+        <a class="bouton bouton--clair" id="qr-club-telecharger-fond" download>Télécharger avec fond</a>
       </div>
     </section>
 
@@ -104,13 +132,11 @@
     <p class="pied__titre">Rotaract</p>
     <p>Les clubs de Cotonou et d’Abomey-Calavi, District 9103.</p>
     <p class="pied__signature">
-      <img src="fanion-nautile-connect.webp" alt="">
+      <img src="fanion-nautile-connect.webp" alt="" loading="lazy" decoding="async">
       <span>Site développé par le Club Rotaract Satellite de Cotonou le Nautile Connect</span>
     </p>
     <p class="pied__copy">© 2026</p>
   </footer>
 
-  <script src="data.js"></script>
-  <script src="club.js"></script>
 </body>
 </html>

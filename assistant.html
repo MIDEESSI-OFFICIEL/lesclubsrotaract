@@ -7,8 +7,12 @@
   <meta name="description" content="Discute avec l’assistant Rotaract pour trouver le club qui correspond à tes envies, ta ville et tes disponibilités.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="style.css">
+  <script defer src="data.js"></script>
+  <script defer src="script.js"></script>
 </head>
 <body class="assistant-page">
   <header class="entete">
@@ -39,8 +43,5 @@
       <p class="assistant__note">Suggestions basées sur les informations disponibles sur le site.</p>
     </section>
   </main>
-
-  <script src="data.js"></script>
-  <script src="script.js"></script>
 </body>
 </html>

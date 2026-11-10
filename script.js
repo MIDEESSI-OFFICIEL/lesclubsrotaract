@@ -1,7 +1,5 @@
-/* Accueil : loader, recherche + filtre, grille */
+/* Accueil : recherche, filtre et grille */
 const racine = document.documentElement;
-const loader = document.getElementById('loader');
-const orbite = document.getElementById('loader-orbit');
 const grille = document.getElementById('grille');
 const recherche = document.getElementById('recherche');
 const compte = document.getElementById('compte');
@@ -72,6 +70,8 @@ function afficherReunionsProches() {
   const fanion = document.createElement('img');
   fanion.className = 'alerte-reunion__fanion';
   fanion.src = club.image;
+  fanion.fetchPriority = 'high';
+  fanion.decoding = 'async';
   fanion.alt = 'Fanion du ' + club.nom;
   gererImageAbsente(fanion);
 
@@ -85,14 +85,6 @@ function afficherReunionsProches() {
   alerte.append(cloche, fanion, message);
   reunionsProches.appendChild(alerte);
 
-  if (window.lottie && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const lecture = window.lottie.loadAnimation({
-      container: animationCloche, renderer: 'svg', loop: 2, autoplay: true,
-      path: 'animation-reunion.json'
-    });
-    lecture.addEventListener('DOMLoaded', () => cloche.classList.add('is-ready'));
-    lecture.addEventListener('data_failed', () => cloche.classList.remove('is-ready'));
-  }
 }
 
 function afficher() {
@@ -459,54 +451,61 @@ document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape' && assistantPanel && !assistantPanel.hidden) ouvrirAssistant(false);
 });
 
-if (assistantLauncher && window.lottie && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  const animationAssistant = window.lottie.loadAnimation({
-    container: document.getElementById('assistant-animation'), renderer: 'svg',
-    loop: false, autoplay: true, path: 'assistant-clubs.json'
-  });
-  animationAssistant.addEventListener('DOMLoaded', () => assistantLauncher.classList.add('is-ready'));
-  animationAssistant.addEventListener('data_failed', () => assistantLauncher.classList.remove('is-ready'));
-}
 if (!assistantLauncher && assistantPanel) ouvrirAssistant(true);
 
 function afficherContenu() { racine.classList.add('ready'); }
 
-function lancerLoader() {
-  // Tous les fanions forment l'étoile ; taille et rayon s'adaptent au nombre de clubs
-  const n = CLUBS.length;
-  const w = n > 5 ? 56 : 64;
-  const r = Math.max(64, Math.ceil(w * 1.1 / (2 * Math.sin(Math.PI / n))));
-  orbite.style.setProperty('--angle', (360 / n) + 'deg');
-  orbite.style.setProperty('--w', w + 'px');
-  orbite.style.setProperty('--h', Math.round(w * 1.35) + 'px');
-  orbite.style.setProperty('--r', r + 'px');
-  CLUBS.forEach((club, i) => {
-    const img = document.createElement('img');
-    img.className = 'loader__fanion';
-    img.src = club.image;
-    img.alt = '';
-    img.style.setProperty('--i', i);
-    gererImageAbsente(img);
-    orbite.appendChild(img);
+function chargerAnimationsDecoratives() {
+  if (window.lottie || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const script = document.createElement('script');
+  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js';
+  script.async = true;
+  script.addEventListener('load', () => {
+    if (!window.lottie) {
+      console.error('La bibliothèque des animations décoratives est indisponible.');
+      return;
+    }
+
+    document.querySelectorAll('.alerte-reunion__animation').forEach(container => {
+      const cloche = container.closest('.alerte-reunion__cloche');
+      const lecture = window.lottie.loadAnimation({
+        container, renderer: 'svg', loop: 2, autoplay: true, path: 'animation-reunion.json'
+      });
+      lecture.addEventListener('DOMLoaded', () => cloche.classList.add('is-ready'));
+      lecture.addEventListener('data_failed', () => cloche.classList.remove('is-ready'));
+    });
+
+    if (assistantLauncher) {
+      const animationAssistant = window.lottie.loadAnimation({
+        container: document.getElementById('assistant-animation'), renderer: 'svg',
+        loop: false, autoplay: true, path: 'assistant-clubs.json'
+      });
+      animationAssistant.addEventListener('DOMLoaded', () => assistantLauncher.classList.add('is-ready'));
+      animationAssistant.addEventListener('data_failed', () => assistantLauncher.classList.remove('is-ready'));
+    }
   });
-  document.body.style.overflow = 'hidden';
-  setTimeout(() => {                       // après 2 s : éclatement
-    loader.classList.add('is-burst');
-    setTimeout(() => {                     // puis on retire le loader du DOM
-      loader.remove();
-      document.body.style.overflow = '';
-      afficherContenu();
-    }, 200);
-  }, 2000);
+  script.addEventListener('error', () => {
+    console.error('Impossible de charger la bibliothèque des animations décoratives.');
+  });
+  document.head.appendChild(script);
 }
 
 if (grille) {
   afficher();
   afficherReunionsProches();
 
-  // Pas de loader si animations réduites ou si on revient depuis une page club
-  const sansLoader = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    || location.search.includes('retour');
   if (location.search.includes('retour')) history.replaceState(null, '', location.pathname + location.hash);
-  if (sansLoader) { loader.remove(); afficherContenu(); } else { lancerLoader(); }
+  afficherContenu();
+}
+
+if (assistantLauncher || document.querySelector('.alerte-reunion__animation')) {
+  const chargerPlusTard = () => {
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(chargerAnimationsDecoratives, { timeout: 2500 });
+    } else {
+      window.setTimeout(chargerAnimationsDecoratives, 800);
+    }
+  };
+  if (document.readyState === 'complete') chargerPlusTard();
+  else window.addEventListener('load', chargerPlusTard, { once: true });
 }

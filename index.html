@@ -6,19 +6,14 @@
   <title>Rotaract · Les clubs de Cotonou et d’Abomey-Calavi</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="style.css">
+  <script defer src="data.js"></script>
+  <script defer src="script.js"></script>
 </head>
 <body>
-  <!-- Chargement : fanions en orbite + texte (rempli par script.js) -->
-  <div class="loader" id="loader" aria-hidden="true">
-    <div class="loader__stage">
-      <div class="loader__orbit" id="loader-orbit"></div>
-      <p class="loader__devise">Servir D'abord</p>
-    </div>
-    <p class="loader__texte">Chargement des clubs…</p>
-  </div>
-
   <header class="entete">
     <div class="entete__in">
       <a class="marque" href="index.html?retour=1">Rotaract</a>
@@ -67,7 +62,7 @@
     <p class="pied__titre">Rotaract</p>
     <p>Les clubs de Cotonou et d’Abomey-Calavi, District 9103.</p>
     <p class="pied__signature">
-      <img src="fanion-nautile-connect.webp" alt="">
+      <img src="fanion-nautile-connect.webp" alt="" loading="lazy" decoding="async">
       <span>Site développé par le Club Rotaract Satellite de Cotonou le Nautile Connect</span>
     </p>
     <p class="pied__copy">© 2026</p>
@@ -82,8 +77,5 @@
   </div>
 
   <noscript><p style="text-align:center;padding:2rem">Activez JavaScript pour afficher les clubs.</p></noscript>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
-  <script src="data.js"></script>
-  <script src="script.js"></script>
 </body>
 </html>

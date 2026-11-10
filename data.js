@@ -97,6 +97,9 @@ function creerCarte(club, i, anime) {
   const img = document.createElement('img');
   img.className = 'carte__image';
   img.src = club.image;
+  img.loading = 'lazy';
+  img.decoding = 'async';
+  img.fetchPriority = 'low';
   img.alt = 'Fanion du ' + club.nom;
   gererImageAbsente(img);
   const nom = document.createElement('span');
